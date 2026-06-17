@@ -1,6 +1,7 @@
 ﻿from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from config import settings
 from database import Base, engine
 from routers import auth, chat, conversations
 
@@ -9,10 +10,12 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="AI Chat API", version="1.0.0")
 
+allowed_origins = [origin.strip() for origin in settings.ALLOWED_ORIGINS.split(",") if origin.strip()]
+
 # Allow React frontend to call this backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
