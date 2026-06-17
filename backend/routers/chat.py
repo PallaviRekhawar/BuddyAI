@@ -1,13 +1,15 @@
+from datetime import datetime
+
+import httpx
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
+
 from core.dependencies import get_current_user
-from models.user import User
+from database import get_db
 from models.conversation import Conversation
 from models.message import Message
-from database import get_db
-import httpx
-from datetime import datetime   # <-- add this line
+from models.user import User
 
 router = APIRouter(prefix="/chat", tags=["Chat"])
 

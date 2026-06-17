@@ -1,13 +1,15 @@
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
-from pydantic import BaseModel
 from datetime import datetime
 from typing import List, Optional
+
+from fastapi import APIRouter, Depends, HTTPException
+from pydantic import BaseModel
+from sqlalchemy.orm import Session
+
+from core.dependencies import get_current_user
 from database import get_db
-from models.user import User
 from models.conversation import Conversation
 from models.message import Message
-from core.dependencies import get_current_user
+from models.user import User
 
 router = APIRouter(prefix="/conversations", tags=["Conversations"])
 
