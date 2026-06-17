@@ -16,6 +16,7 @@ allowed_origins = [origin.strip() for origin in settings.ALLOWED_ORIGINS.split("
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
+    allow_origin_regex=r"https?://.*",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
